@@ -374,11 +374,12 @@ jQuery(document).on('ready', function() {
       var entity_details = schedule[i];
       var display_title = entity_details.title;
       var description = markdownit({breaks:true}).render(tracks[talk_id].description.replace(/\\n/g,"\n"));
+      var short_description = description.slice(0, description.indexOf('</p>')+4);
       var speaker_name = tracks[talk_id].hasOwnProperty('speaker') ? tracks[talk_id].speaker.name : '';
       var time_duration = entity_details.start_time + ' - ' + entity_details.end_time;
       var current_day_track = schedule[i].track;
 
-      var each_row = [time_duration, display_title, speaker_name, description, talk_id];
+      var each_row = [time_duration, display_title, speaker_name, description, talk_id, short_description];
 
       if (current_day_track == 'all' || typeof current_day_track == "undefined") {
         schedule_rows[0].push(each_row);
@@ -464,7 +465,8 @@ jQuery(document).on('ready', function() {
                             </div>
                             
                             <div class="tg-talk-description" id='desc` + nrow[4] + `'>
-                             ` + nrow[3] + `
+                             ` + nrow[5] + `
+                             <a href="\`+ link +\`">contiue reading...</a>
                              
                             </div> 
                             </div>
