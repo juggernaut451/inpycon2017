@@ -454,6 +454,12 @@ jQuery(document).on('ready', function() {
       } else {
         $(row).each(function() {
           var nrow = $(this);
+          var description = ''
+          if(nrow[5]){
+              description = ` <span class="short-description">` + nrow[5] + `</span>
+                                <span id="12" class="more" style="cursor: pointer" >more...</span>
+                                <span class="long-description" hidden=true>` + nrow[3] + `</span>`
+          }
           row_html += `<div class="tg-event">
                         <div class="tg-eventspeaker">
                           <div class="tg-contentbox">
@@ -465,9 +471,7 @@ jQuery(document).on('ready', function() {
                             </div>
                             
                             <div class="tg-talk-description" id='desc` + nrow[4] + `'>
-                             ` + nrow[5] + `
-                             <a href="\`+ link +\`">contiue reading...</a>
-                             
+                                `+ description +`   
                             </div> 
                             </div>
                             <!--<div class="tg-rightarea">
@@ -498,4 +502,6 @@ jQuery(document).on('ready', function() {
       $(this).find('.tg-talk-description').slideToggle();
     });
   }
+
+
 });
